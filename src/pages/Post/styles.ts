@@ -92,26 +92,6 @@ export const PostArticle = styled.article`
 		margin-bottom: 0.5rem;
 	}
 
-	pre {
-		display: flex;
-		align-items: center;
-		margin: 0.5rem 0;
-		padding: 1rem;
-
-		background: ${(props) => props.theme['blue-600']};
-		border-radius: 2px;
-	}
-
-	code {
-		font-family: 'Fira Code', monospace;
-		margin: 0.125rem;
-		padding: 0.25rem 0.5rem;
-		border-radius: 2px;
-
-		background: ${(props) => props.theme['blue-600']};
-		color: ${(props) => props.theme.white};
-	}
-
 	ul {
 		list-style-type: disc;
 		margin: 0.75rem 0;

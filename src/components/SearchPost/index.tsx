@@ -1,9 +1,9 @@
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { SearchContainer, SearchInput, SearchLabel } from './styles'
-import { useEffect } from 'react'
 
 const searchFormSchema = z.object({
 	query: z.string(),
@@ -16,15 +16,13 @@ interface SearchPostProps {
 }
 
 export function SearchPost({ filterPost }: SearchPostProps) {
-	const { register, watch } = useForm<SearchFormInputs>({
+	const { register } = useForm<SearchFormInputs>({
 		resolver: zodResolver(searchFormSchema),
 	})
 
-	const watchInput = watch('query')
-
-	useEffect(() => {
-		filterPost(watchInput)
-	}, [watchInput, filterPost])
+	function handleFilterPost(query: string) {
+		filterPost(query)
+	}
 
 	return (
 		<SearchContainer>
@@ -35,7 +33,10 @@ export function SearchPost({ filterPost }: SearchPostProps) {
 			<SearchInput
 				type="text"
 				placeholder="Buscar conteúdo"
-				{...register('query')}
+				{...register('query', {
+					onChange: (e: React.FormEvent<HTMLInputElement>) =>
+						handleFilterPost(e.currentTarget.value),
+				})}
 			></SearchInput>
 		</SearchContainer>
 	)

@@ -12,6 +12,11 @@ export const ProfileContainer = styled.div`
 
 		border-radius: 8px;
 	}
+
+	> span {
+		width: 100%;
+		text-align: center;
+	}
 `
 
 export const ProfileContent = styled.div`

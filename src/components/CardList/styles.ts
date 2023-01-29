@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const CardListContent = styled.ul`
 	width: 100%;
@@ -8,7 +9,8 @@ export const CardListContent = styled.ul`
 	margin-bottom: 2rem;
 `
 
-export const ListItem = styled.li`
+export const ButtonListItem = styled(Link)`
+	text-decoration: none;
 	max-width: 24.5rem;
 	max-height: 16.25rem;
 	display: flex;
@@ -54,4 +56,6 @@ export const ListItem = styled.li`
 	}
 `
 
-export const DescripitionPost = styled.p``
+export const DescripitionPost = styled.p`
+	color: ${(props) => props.theme['blue-200']};
+`

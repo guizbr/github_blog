@@ -1,67 +1,45 @@
-import { CardListContent, DescripitionPost, ListItem } from './styles'
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
+import { formatDate } from '../../utils/FormatDate'
+import { CardListContent, DescripitionPost, ButtonListItem } from './styles'
 
-export function CardList() {
-	const txt = `Programming languages all have built-in data structures, but these
-	often differ from one language to another. This article attempts to
-	list the built-in data structures available in JavaScript and what
-	properties they have. These can be used to build other data
-	structures. Wherever possible, comparisons with other languages are
-	drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-	language. Variables in JavaScript are not directly associated with any
-	particular value type, and any variable can be assigned (and
-	re-assigned) values of all types: let foo = 42; // foo is now a number
-	foo = 'bar'; // foo is now a string foo = true; // foo is now a
-	boolean`
+interface CardListProps {
+	posts: {
+		number: number
+		title: string
+		created_at: string
+		body: string
+	}[]
+}
+
+export function CardList({ posts }: CardListProps) {
+	function trasnformMarkdownToText(mark: string) {
+		const plainText = marked(mark)
+		const clean = DOMPurify.sanitize(plainText)
+		const text = new DOMParser().parseFromString(clean, 'text/html').body
+			.textContent
+		return text
+	}
 
 	return (
 		<CardListContent>
-			<ListItem>
-				<header>
-					<h2>JavaScript data types and data structures</h2>
+			{posts.map((post) => (
+				<li key={post.number}>
+					<ButtonListItem to={`/post/${post.number}`}>
+						<header>
+							<h2>{post.title}</h2>
 
-					<time>Há 1 dia</time>
-				</header>
+							<time>{formatDate(post.created_at)}</time>
+						</header>
 
-				<DescripitionPost>
-					{txt.length > 185 ? txt.substring(0, 183) + '...' : txt}
-				</DescripitionPost>
-			</ListItem>
-
-			<ListItem>
-				<header>
-					<h2>JavaScript data types and data structures</h2>
-
-					<time>Há 1 dia</time>
-				</header>
-
-				<DescripitionPost>
-					{txt.length > 185 ? txt.substring(0, 183) + '...' : txt}
-				</DescripitionPost>
-			</ListItem>
-
-			<ListItem>
-				<header>
-					<h2>JavaScript data types and data structures</h2>
-
-					<time>Há 1 dia</time>
-				</header>
-
-				<DescripitionPost>
-					{txt.length > 185 ? txt.substring(0, 183) + '...' : txt}
-				</DescripitionPost>
-			</ListItem>
-
-			<ListItem>
-				<header>
-					<h2>JavaScript data types and data structures</h2>
-
-					<time>Há 1 dia</time>
-				</header>
-
-				<DescripitionPost>
-					{txt.length > 185 ? txt.substring(0, 183) + '...' : txt}
-				</DescripitionPost>
-			</ListItem>
+						<DescripitionPost>
+							{trasnformMarkdownToText(post.body)!.length > 185
+								? trasnformMarkdownToText(post.body)!.substring(0, 183) + '...'
+								: trasnformMarkdownToText(post.body)}
+						</DescripitionPost>
+					</ButtonListItem>
+				</li>
+			))}
 		</CardListContent>
 	)
 }
