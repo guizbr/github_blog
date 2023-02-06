@@ -1,6 +1,6 @@
 ## Introdução
 
-Nesse desafio da Rocketseat da trilha de ReactJS do Ignite, desenvolvi um blog pessoal do zero utilizando o Vite e Styled Components, onde o layout do site foi disponibilizado pela própria Rocketseat e os dados foram consumidos pela API do Github.
+Nesse desafio da Rocketseat da trilha de ReactJS do Ignite, desenvolvi um blog pessoal do zero utilizando a ferramenta de construção Vite, TypeScript e Styled Components, onde o layout do site foi disponibilizado pela própria Rocketseat e os dados foram consumidos pela API do Github.
 
 ## Sobre o projeto
 
