@@ -13,9 +13,10 @@ type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 interface SearchPostProps {
 	filterPost: (query: string) => void
+	postQuantity: number
 }
 
-export function SearchPost({ filterPost }: SearchPostProps) {
+export function SearchPost({ filterPost, postQuantity }: SearchPostProps) {
 	const { register } = useForm<SearchFormInputs>({
 		resolver: zodResolver(searchFormSchema),
 	})
@@ -27,7 +28,12 @@ export function SearchPost({ filterPost }: SearchPostProps) {
 	return (
 		<SearchContainer>
 			<SearchLabel>
-				Publicações <span>6 publicações</span>
+				Publicações{' '}
+				<span>
+					{postQuantity !== 1
+						? `${postQuantity} publicações`
+						: `${postQuantity} publicação`}
+				</span>
 			</SearchLabel>
 
 			<SearchInput

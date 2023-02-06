@@ -156,7 +156,10 @@ export function Home() {
 				</ProfileContainer>
 			</Box>
 
-			<SearchPost filterPost={handleFilterPost}></SearchPost>
+			<SearchPost
+				filterPost={handleFilterPost}
+				postQuantity={posts.length}
+			></SearchPost>
 
 			<MainContainer>
 				{loadingPosts === true && (
